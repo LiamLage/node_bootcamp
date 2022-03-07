@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "nodemon": "^2.0.15"
+  },
+	"scripts": {
+		"start": "nodemon ./01_node_farm/03_simple_api.js"
+	}
+}

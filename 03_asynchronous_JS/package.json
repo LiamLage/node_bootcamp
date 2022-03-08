@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "start": "nodemon dog_api_promises.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "name": "03_asynchronous_js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "superagent": "^7.1.1"
+  }
+}

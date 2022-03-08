@@ -11,7 +11,7 @@
 const fs = require('fs');			// Docs - https://nodejs.org/dist/latest-v16.x/docs/api/fs.html
 const http = require('http');	// Docs - https://nodejs.org/dist/latest-v16.x/docs/api/http.html
 const url = require('url');		// Docs - https://nodejs.org/dist/latest-v16.x/docs/api/url.html
-// const slugify = require('slugify');	// Docs - https://www.npmjs.com/package/slugify
+const slugify = require('slugify');	// Docs - https://www.npmjs.com/package/slugify
 
 const replace_template = require('./modules/replace_template');
 
@@ -27,6 +27,9 @@ const template_product = fs.readFileSync(`${__dirname}/templates/template_produc
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
 const data_obj = JSON.parse(data);	// Convert JSON into object
 
+// map() creates a new array populated with the results of calling slugify on every element in the calling array.
+const slugs = data_obj.map(element => slugify(element.product_name, { lower: true }));
+console.log(slugs);
 
 const server = http.createServer((req, res) => {
 	const { query, pathname } = (url.parse(req.url, true));
@@ -72,7 +75,6 @@ const server = http.createServer((req, res) => {
 		);
 	}
 });
-
 
 server.listen(8000, '127.0.0.1', () => {
 	console.log('Listening to requests on port 8000');

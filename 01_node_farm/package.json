@@ -4,11 +4,16 @@
   "description": "Learning node.js",
   "main": "01_reading_writing_files.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon 03_server_2.0.js"
   },
   "author": "Liam Lage",
   "license": "ISC",
   "dependencies": {
     "slugify": "^1.6.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "nodemon": "^2.0.15"
   }
 }

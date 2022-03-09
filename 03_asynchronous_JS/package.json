@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "nodemon dog_api_promises.js"
+    "start": "nodemon await_multiple_promises.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

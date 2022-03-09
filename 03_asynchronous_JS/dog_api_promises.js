@@ -12,9 +12,11 @@ const superagent = require('superagent');
 // Building the read_file promise
 const read_file_promise = (file) => {
   return new Promise((resolve, reject) => {
-    fs.readFile(file, (err, data) => {
+    fs.readFile(file, 'utf-8', (err, data) => {
+			// If readFile encountered error, reject the promise
       if (err) reject(`Read File ${err}`);
-      resolve(data);
+			// If readFile was successful, ressolve the promise
+			resolve(data);
     });
   });
 };
@@ -23,7 +25,9 @@ const read_file_promise = (file) => {
 const write_file_promise = (file, data) => {
   return new Promise((resolve, reject) => {
     fs.writeFile(file, data, (err) => {
+			// If writeFile encountered error, reject the promise
       if (err) reject(`Write File Error: ${err}`);
+			// If writeFile was successful, ressolve the promise
       resolve('success');
     });
   });

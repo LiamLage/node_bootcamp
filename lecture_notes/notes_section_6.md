@@ -40,6 +40,8 @@ Postman simplifies API development.
 
 ### **Setting up Express & Basic Routing**
 
+[Express Documentation](https://expressjs.com/en/4x/api.html)
+
 ```JavaScript
 const express = require('express');
 
@@ -321,6 +323,330 @@ app
   .get(get_tour)
   .patch(update_tour)
   .delete(delete_tour);
+```
+
+---
+
+## [Lecture 58](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15064866)
+
+### **Middleware & the Request-Response Cycle**
+
+![req-res_cycle](C:/Users/Kurt/Documents/education/node_course/middleware_request_response_cycle.JPG)
+
+---
+
+## [Lecture 59](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15064868)
+
+### **Creating Our Own Middleware**
+
+Below we have a middleware that adds the current time to the request
+
+```JavaScript
+// Add the time to the request
+app.use((req, res, next) => {
+  req.request_time = new Date().toISOString();
+  next();
+});
+```
+
+---
+
+## [Lecture 60](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15064872)
+
+### **Using 3rd-Party Middleware**
+
+[Express Morgan](https://github.com/expressjs/morgan)
+
+```JavaScript
+const morgan = require('morgan');
+
+app.use(morgan('dev'));
+```
+
+---
+
+## [Lecture 61](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15064878)
+
+### **Implementing the 'Users' Routes**
+
+```JavaScript
+// Example of getting all users
+const get_all_users = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined.',
+  });
+};
+
+// Example of getting specific user
+const get_user_by_id = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined.',
+  });
+};
+
+app.route('/api/v1/users')
+   .get(get_all_users)
+   .post(create_user);
+
+app
+  .route('/api/v1/users/:id')
+  .get(get_user_by_id)
+  .patch(update_user)
+  .delete(delete_user);
+```
+
+---
+
+## [Lecture 62](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15064882)
+
+### **Creating & Mounting Multiple Routers**
+
+```JavaScript
+const tour_router = app.Router();
+const user_router = app.Router();
+
+app.use('/api/v1/tours', tour_router);
+app.use('/api/v1/users', user_router);
+
+tour_router
+          .route('/')
+          .get(get_all_tours)
+          .post(create_tour)
+
+tour_router
+          .route('/:id')
+          .get(get_tour_by_id)
+          .patch(update_tour)
+          .delete(delete_tour)
+
+user_router
+          .route('/')
+          .get(get_all_users)
+          .post(create_user)
+
+user_router
+          .route('/:id')
+          .get(get_user_by_id)
+          .patch(update_user)
+          .delete(delete_user)
+```
+
+---
+
+## [Lecture 63](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15064884)
+
+### **A Better File Structure**
+
+Refactoring the Natours project.
+
+---
+
+## [Lecture 64](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15064886)
+
+### **Param Middleware**
+
+```JavaScript
+// An example of a parameter middleware function
+router.param('id', (req, res, next, val) => {
+  console.log(`Tour ID is: ${val}`);
+  next();
+});
+
+/* We will use this middleware function to check for a valid ID
+   in the request, instead of checking for it in each function
+   that relies on an ID */
+exports.check_id = (req, res, next, val) => {
+  if (req.params.id * 1 > tours.length) {
+    /* The return statement is vital, without it, express would send
+       the response and continue with the next middleware function */
+    return res.status(404).json({
+      status: 'failed',
+      message: 'Invalid ID',
+    });
+  }
+  next();
+};
+```
+
+---
+
+## [Lecture 65](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15064888)
+
+### **Chaining Multiple Middleware Functions**
+
+```JavaScript
+/* To chain two middleware functions, we add them both 
+   into the handler stack */
+router.post(tour_controller.check_body, tour_controller.create_tour);
+```
+
+---
+
+## [Lecture 66](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15064890)
+
+### **Serving Static Files**
+
+```JavaScript
+const express = require('express');
+
+const app = express();
+
+app.use(express.static(`${__dirname}/public`));
+
+app.listen(8000);
+```
+
+Let's say for example that we want to access `overview.html` that is located in `./public`, we would go to the following URL:
+
+<localhost:8000/overview.html>
+
+Why is it not <localhost:8000/public/overview.html>?
+
+If we request a URL that it cannot find in any of our routes, it will then look in the `./public` directory
+that we defined in `express.static(<path>)`, and it sets that directory to the root.
+
+---
+
+## [Lecture 67](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15064894)
+
+### **Environment Variables**
+
+Environment variables are global variables that are used to define the environment in which a Node app is running.
+
+Node.js & express apps can run in different environments, the most important ones are:
+
+- Development
+- Production
+
+By default, express sets the environment to development.
+
+We can access environment variables by:
+
+```JavaScript
+// express environment
+console.log(app.get('env'));
+
+// Node environment
+console.log(process.env);
+```
+
+Setting an environment variable from the terminal:
+
+```PowerShell
+# If we want to set an environment variable in the terminal:
+
+# In windows
+~$ set NODE_ENV=development
+
+# Linux / Mac
+~$ NODE_ENV=development
+```
+
+We can define the following scripts in `package.json` to start the application
+in either a development or production environment:
+
+```JSON
+{
+  "scripts": {
+    // dev environment
+    "start:dev": "nodemon server.js",
+    // production environment
+    "start:prod": "set NODE_ENV=production && nodemon server.js"
+  },
+}
+```
+
+We can also use environment variables for configuration of variables that may change depending
+on the environment that the app is running in. For example, we may use different databases for
+development and testing vs production. We could define an environment variable for each and then
+activate the correct DB depending on the environment.
+
+We can define the environment variables in a `.env` file, in this case `config.env`, the contents may look something like this:
+
+```.env
+NODE_ENV=development
+PORT=8000
+```
+
+To use these environment variables in our application, one method is using the node module `dotenv`
+
+```PowerShell
+~$ npm i dotenv
+```
+
+```JavaScript
+const dotenv = require('dotenv');
+
+// Get the variables from the config file & save them as Node environment variables
+dotenv.config({ path: `${__dirname}/config.env` });
+
+// Only log if we are in development
+if(process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
+// Get the port from the config
+server.listen(process.env.PORT);
+
+```
+
+## [Lecture 68](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15064896)
+
+### **Setting Up [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/docs/en/index.html) in VS Code**
+
+We will install the following dev dependencies:
+
+| Package                | Reason                                               |
+|:-----------------------|:-----------------------------------------------------|
+| eslint                 |                                                      |
+| prettier               |                                                      |
+| eslint-config-prettier | Disable formatting for ESLint, use prettier instead  |
+| eslint-plugin-prettier | Allow ESLint to show formatting errors using prettier|
+| eslint-config-airbnb   | JS style guide                                       |
+| eslint-plugin-node     | Node specific errors                                 |
+| eslint-plugin-import   | Needed for airbnb style guide                        |
+| eslint-plugin-jsx-a11y | Needed for airbnb style guide                        |
+| eslint-plugin-react    | Needed for airbnb style guide                        |
+
+```PowerShell
+~$ npm i eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-config-airbnb eslint-plugin-node eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react --save-dev
+```
+
+Config files for Prettier & ESLint:
+
+- `.prettierrc`
+
+```JSON
+{
+  "singleQuote": true
+}
+```
+
+- `.eslintrc.json`
+
+```JSON
+{
+  "extends": ["airbnb", "prettier", "plugin:node/recommended"],
+  "plugins": ["prettier"],
+  "rules": {
+    "linebreak-style": ["windows"],
+    "prettier/prettier": "error",
+    "spaced-comment": "off",
+    "no-console": "warn",
+    "consistent-return": "off",
+    "func-names": "warn",
+    "object-shorthand": "off",
+    "no-process-exit": "off",
+    "no-param-reassign": "off",
+    "no-return-await": "off",
+    "no-underscore-dangle": "off",
+    "class-methods-use-this": "off",
+    "prefer-destructuring": ["error", { "object": true, "array": false }],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "req|res|next|val" }]
+  }
+}
 ```
 
 ---

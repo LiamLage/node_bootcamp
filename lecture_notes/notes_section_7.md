@@ -14,9 +14,19 @@
 
 [MongoDB Documentation](https://docs.mongodb.com/)
 
+[MongoDB Server Documentation](https://docs.mongodb.com/manual/)
+
+[MongoDB Atlas Documentation](https://docs.atlas.mongodb.com/)
+
+[MongoDB Compass Documentation](https://docs.mongodb.com/compass/current/)
+
+[MongoDB with Node.js](https://www.mongodb.com/languages/mongodb-with-nodejs)
+
 [MongoDB Guides](https://docs.mongodb.com/guides/)
 
 [MongoDB Basics Course - M001](https://university.mongodb.com/courses/M001/about)
+
+[MongoDB for JavaScript Developers - M220JS](https://university.mongodb.com/courses/M220JS/about)
 
 Key Features:
 
@@ -67,26 +77,26 @@ To run MongoDB Server:
 
 ```PowerShell
 # cd to the directory where MongoDB is installed
-~$ cd C:\Program Files\MongoDB\Server\5.0\bin
+> cd C:\Program Files\MongoDB\Server\5.0\bin
 
 # Start the MongoDB Server
-~$ .\mongod.exe
+> .\mongod.exe
 ```
 
 To run MongoDB:
 
 ```PowerShell
 # cd to the directory where MongoDB is installed
-~$ cd C:\Program Files\MongoDB\Server\5.0\bin
+> cd C:\Program Files\MongoDB\Server\5.0\bin
 
 # Start MongoDB
-~$ .\mongo.exe
+> .\mongo.exe
 ```
 
 To run MongoDB from home directory, add `C:\Program Files\MongoDB\Server\5.0\bin` to system PATH environment variable, then:
 
 ```PowerShell
-~$ mongod
+> mongod
 ```
 
 ---
@@ -95,14 +105,14 @@ To run MongoDB from home directory, add `C:\Program Files\MongoDB\Server\5.0\bin
 
 ### **Creating a Local Database**
 
-[db.collection.insertOne() documentation](https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/)
+[db.collection.insertOne()](https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/)
 
 ```PowerShell
 # Start a new server instance
-~$ mongod
+> mongod
 
 # In a new window, start a MongoDB instance
-~$ mongo
+> mongo
 
 # To create a new database (natours_test) in this example, or to switch to an existing database, use the 'use' command
 > use natours_test
@@ -117,7 +127,7 @@ switched to db natours_test
         "insertedId" : ObjectId("622a19a7cbb3569188bf5417")
 }
 
-# We can see that the document was added with .find()
+# Query all documents in collection 'tours'
 > db.tours.find()
 { "_id" : ObjectId("622a19a7cbb3569188bf5417"), "name" : "The Forest Hiker", "price" : 297, "rating" : 4.7 }
 
@@ -138,11 +148,63 @@ natours_test  0.000GB
 
 ### **CRUD: Creating Documents**
 
+[`db.collection.insertOne()`](https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/)
+
+[`db.collections.insertMany()`](https://docs.mongodb.com/manual/reference/method/db.collection.insertMany/)
+
+```PowerShell
+# Creating multiple documents - insertMany() takes an array of multiple objects
+> db.tours.insertMany([{name: "The Sea Explorer", price: 497, rating: 4.8}, {name: "The Snow Adventurer", price: 997, rating: 4.9, difficulty: "easy"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("622ae89a3a52880aaa207ebb"),
+                ObjectId("622ae89a3a52880aaa207ebc")
+        ]
+}
+
+# Query all documents in collection 'tours'
+> db.tours.find()
+{ "_id" : ObjectId("622a19a7cbb3569188bf5417"), "name" : "The Forest Hiker", "price" : 297, "rating" : 4.7 }
+{ "_id" : ObjectId("622ae89a3a52880aaa207ebb"), "name" : "The Sea Explorer", "price" : 497, "rating" : 4.8 }
+{ "_id" : ObjectId("622ae89a3a52880aaa207ebc"), "name" : "The Snow Adventurer", "price" : 997, "rating" : 4.9, "difficulty" : "easy" }
+```
+
 ---
 
 ## [Lecture 76](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15065010)
 
 ### **CRUD: Querying (Reading) Documents**
+
+[`db.collection.find()`](https://docs.mongodb.com/manual/reference/method/db.collection.find/)
+
+```PowerShell
+# Search in a collection with filter criteria
+> db.tours.find({ name: "The Forest Hiker" })
+{ "_id" : ObjectId("622a19a7cbb3569188bf5417"), "name" : "The Forest Hiker", "price" : 297, "rating" : 4.7 }
+
+# Search for tours with a price below 500
+# $lte operator means <=
+> db.tours.find({ price: {$lte: 500} })
+{ "_id" : ObjectId("622a19a7cbb3569188bf5417"), "name" : "The Forest Hiker", "price" : 297, "rating" : 4.7 }
+{ "_id" : ObjectId("622ae89a3a52880aaa207ebb"), "name" : "The Sea Explorer", "price" : 497, "rating" : 4.8 }
+
+# Search for multiple critera
+# price < 500, rating >= 4.8
+> db.tours.find({ price: {$lt: 500}, rating: {$gte: 4.8} })
+{ "_id" : ObjectId("622ae89a3a52880aaa207ebb"), "name" : "The Sea Explorer", "price" : 497, "rating" : 4.8 }
+
+# Search for price < 500 || rating >= 4.8
+> db.tours.find({ $or: [ {price: {$lt: 500}}, {rating: {$gte: 4.8}} ] })
+{ "_id" : ObjectId("622a19a7cbb3569188bf5417"), "name" : "The Forest Hiker", "price" : 297, "rating" : 4.7 }
+{ "_id" : ObjectId("622ae89a3a52880aaa207ebb"), "name" : "The Sea Explorer", "price" : 497, "rating" : 4.8 }
+{ "_id" : ObjectId("622ae89a3a52880aaa207ebc"), "name" : "The Snow Adventurer", "price" : 997, "rating" : 4.9, "difficulty" : "easy" }
+
+# If we want to project a specific field in the output
+> db.tours.find({ price: {$lte: 500} }, { name: 1 })
+{ "_id" : ObjectId("622a19a7cbb3569188bf5417"), "name" : "The Forest Hiker" }
+{ "_id" : ObjectId("622ae89a3a52880aaa207ebb"), "name" : "The Sea Explorer" }
+```
 
 ---
 
@@ -150,11 +212,44 @@ natours_test  0.000GB
 
 ### **CRUD: Updating Documents**
 
+[`db.collection.updateOne()`](https://docs.mongodb.com/manual/reference/method/db.collection.updateOne/)
+
+[`db.collection.updateMany()`](https://docs.mongodb.com/manual/reference/method/db.collection.updateMany/)
+
+```PowerShell
+# To update a single document
+# Update the price of 'The Snow Adventurer' to 597
+> db.tours.updateOne({name: "The Snow Adventurer"}, {$set: {price: 597}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+# Add a new property
+# Add a 'premium'property to tours with a price > 500 && rating >= 4.8
+> db.tours.updateMany({ price: {$gt: 500}, rating: {$gte: 4.8} }, { $set: {premium: true} })
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+# Replace a document
+> db.collection.replaceOne()
+> db.collection.replaceMany()
+```
+
 ---
 
 ## [Lecture 78](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15065014)
 
 ### **CRUD: Deleting Documents**
+
+[`db.collection.deleteOne()`](https://docs.mongodb.com/manual/reference/method/db.collection.deleteOne/)
+
+[`db.collection.deleteMany()`](https://docs.mongodb.com/manual/reference/method/db.collection.deleteMany/)
+
+```PowerShell
+# Delete all documents with a rating < 4.8
+> db.tours.deleteMany({ rating: {$lt: 4.8} })
+{ "acknowledged" : true, "deletedCount" : 1 }
+
+# Delete all documents in the DB
+db.tours.deleteMany({})
+```
 
 ---
 
@@ -162,11 +257,15 @@ natours_test  0.000GB
 
 ### **Using Compass App for CRUD Operations**
 
+[MongoDB Compass Documentation](https://docs.mongodb.com/compass/current/)
+
 ---
 
 ## [Lecture 80](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15065022)
 
 ### **Creating a Hosted Database with Atlas**
+
+[MongoDB Atlas Documentation](https://docs.atlas.mongodb.com/getting-started/)
 
 ---
 

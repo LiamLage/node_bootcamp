@@ -10,7 +10,7 @@ const tour_controller = require(`${__dirname}/../controllers/tour_controller`);
 
 const router = express.Router();
 
-router.param('id', tour_controller.check_id);
+// router.param('id', tour_controller.check_id);
 
 // Routes
 router
@@ -18,7 +18,7 @@ router
 	   without breaking the production version */
   .route('/')
   .get(tour_controller.get_all_tours)
-  .post(tour_controller.check_body, tour_controller.create_tour);
+  .post(tour_controller.create_tour);
 
 router
   /* To create variables in the URL, we use a colon before the var, as in

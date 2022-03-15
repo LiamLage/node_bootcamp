@@ -9,8 +9,25 @@ const server = require(`${__dirname}/../server`);
 
 exports.get_all_tours = async (req, res) => {
   try {
-    const tours = await server.get_all_tours(Number.MAX_SAFE_INTEGER);
-    // We will send back all the data for the tours resource
+    // console.log(req.query);
+    // Build query
+    // 1) Filtering
+    const query_obj = { ...req.query };
+    const excluded_fields = ['page', 'sort', 'limit', 'fields']; // For now we will ignore these until they are implemented later
+    excluded_fields.forEach((el) => delete query_obj[el]);
+
+    // 2) Advanced Filtering
+		let query_str = JSON.stringify(query_obj);
+		query_str = query_str.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`)
+		// console.log(JSON.parse(query_str))
+
+
+
+    const query = server.get_all_tours(Number.MAX_SAFE_INTEGER, query_str);
+
+    // Execute query
+    const tours = await query;
+    // Send response
     res.status(200).json({
       status: 'success',
       results:

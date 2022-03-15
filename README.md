@@ -8,7 +8,7 @@
 
 ---
 
-## Progress Tracker: 92/229 Lectures - 40.17%
+## Progress Tracker: 95/229 Lectures - 41%
 
 ## Sections & Lectures
 
@@ -140,9 +140,9 @@
   - [x] 90 - Reading Documents
   - [x] 91 - Updating Documents
   - [x] 92 - Deleting Documents
-  - [] 93 - Modeling the Tours
-  - [] 94 -
-  - [] 95 -
+  - [x] 93 - Modeling the Tours
+  - [x] 94 - Importing Development Data
+  - [x] 95 - Making the API Better: Filtering
   - [] 96 -
   - [] 97 -
   - [] 98 -

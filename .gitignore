@@ -109,3 +109,10 @@ dist
 
 # Prettier
 .prettierrc
+.prettierrc.json
+
+# IDE
+.vscode
+
+# Data Backup
+tours_simple_backup.json

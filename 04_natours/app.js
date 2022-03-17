@@ -8,6 +8,7 @@
 
 const express = require('express');
 const morgan = require('morgan');
+const query_type = require('query-types');
 
 const tour_router = require(`${__dirname}/routes/tour_routes`);
 const user_router = require(`${__dirname}/routes/user_routes`);
@@ -18,6 +19,7 @@ const app = express();
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+app.use(query_type.middleware());
 
 app.use(express.json());
 

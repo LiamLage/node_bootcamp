@@ -12,6 +12,13 @@ const router = express.Router();
 
 // router.param('id', tour_controller.check_id);
 
+router
+  .route('/top-5-tours')
+  .get(tour_controller.alias_top_tours, tour_controller.get_all_tours);
+
+router.route('/tour-stats').get(tour_controller.get_tour_stats);
+router.route('/monthly-plan/:year').get(tour_controller.get_monthly_plan);
+
 // Routes
 router
   /* We specify v1 so that we can make changes to the API

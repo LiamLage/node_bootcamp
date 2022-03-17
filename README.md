@@ -8,7 +8,7 @@
 
 ---
 
-## Progress Tracker: 95/229 Lectures - 41%
+## Progress Tracker: 104/229 Lectures - 45.85%
 
 ## Sections & Lectures
 
@@ -143,20 +143,20 @@
   - [x] 93 - Modeling the Tours
   - [x] 94 - Importing Development Data
   - [x] 95 - Making the API Better: Filtering
-  - [] 96 -
-  - [] 97 -
-  - [] 98 -
-  - [] 99 -
-  - [] 100 -
-  - [] 101 -
-  - [] 102 -
-  - [] 103 -
-  - [] 104 -
-  - [] 105 -
-  - [] 106 -
-  - [] 107 -
-  - [] 108 -
-  - [] 109 -
+  - [x] 96 - Making the API Better: Advanced Filtering
+  - [x] 97 - Making the API Better: Sorting
+  - [x] 98 - Making the API Better: Limiting Fields
+  - [x] 99 - Making the API Better: Pagination
+  - [x] 100 - Making the API Better: Ailiasing
+  - [x] 101 - Refactoring API Features
+  - [x] 102 - Aggregation Pipeline: Matching & Grouping
+  - [x] 103 - Aggregation Pipeline: Unwinding & Projecting
+  - [x] 104 - Virtual Properties
+  - [x] 105 - Document Middleware
+  - [] 106 - Query Middleware
+  - [] 107 - Aggregation Middleware
+  - [] 108 - Data Validation: Built-in Validators
+  - [] 109 - Data Validation: Custom Validators
 
 ---
 

@@ -979,3 +979,85 @@ Using [Slugify](https://www.npmjs.com/package/slugify) to create slugs from the 
 ``` -->
 
 ---
+
+## [Lecture 106](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15065110)
+
+### **Query Middleware**
+
+This is specific to Mongoose:
+
+```Javascript
+// Exclude secret tours, this middleware is executed before the query
+tourSchema.pre(find, function(next)) {
+  this.find({ secretTour: { $ne: true } });
+}
+```
+
+I implemented the same thing in `API_features`
+
+```JavaScript
+filter() {
+  // const collection = server.get_db();
+  // filtering
+
+  const query_obj = { ...this.query_string };
+  const excluded_fields = ['sort', 'fields', 'page', 'limit'];
+  excluded_fields.forEach((el) => delete query_obj[el]);
+
+  let query_str = JSON.stringify(query_obj);
+  query_str = query_str.replace(
+    /\b(gte|gt|lte|lt)\b/g,
+    (match) => `$${match}`
+  );
+  const filtered_query = JSON.parse(query_str);
+
+  // Filter out secret tours
+  filtered_query.secret_tour = {};
+  filtered_query.secret_tour['$ne'] = true;
+
+  this.query = this.query.find(filtered_query);
+
+  return this;
+}
+```
+
+---
+
+## [Lecture 107](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15065112)
+
+### **Aggregation Middleware**
+
+This is specific to Mongoose, I have implemented it in native MongoDB.
+
+We want to exclude secret tours from the aggregation.
+
+```JavaScript
+// Do not include secret tours
+{
+  $match: {
+    secret_tour: { $ne: true },
+  },
+},
+```
+
+---
+
+## [Lecture 108](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15065114)
+
+### **Data Validation: Built-in Validators**
+
+<!-- ```JavaScript
+
+``` -->
+
+---
+
+## [Lecture 109](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/learn/lecture/15065116)
+
+### **Data Validation: Custom Validators**
+
+<!-- ```JavaScript
+
+``` -->
+
+---

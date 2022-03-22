@@ -8,7 +8,7 @@
 
 ---
 
-## Progress Tracker: 104/229 Lectures - 45.85%
+## Progress Tracker: 123/229 Lectures - 45.85%
 
 ## Sections & Lectures
 
@@ -127,7 +127,7 @@
 
 ---
 
-- [] Section 8: Using MongoDB with Mongoose (Completed: )
+- [x] Section 8: Using MongoDB with Mongoose (Completed: 22/01/2022)
 
   - [x] 82 - Section Intro
   - [x] 83 - Connecting Our Database to the Express App
@@ -153,57 +153,59 @@
   - [x] 103 - Aggregation Pipeline: Unwinding & Projecting
   - [x] 104 - Virtual Properties
   - [x] 105 - Document Middleware
-  - [] 106 - Query Middleware
-  - [] 107 - Aggregation Middleware
-  - [] 108 - Data Validation: Built-in Validators
-  - [] 109 - Data Validation: Custom Validators
+  - [x] 106 - Query Middleware
+  - [x] 107 - Aggregation Middleware
+  - [x] 108 - Data Validation: Built-in Validators
+  - [x] 109 - Data Validation: Custom Validators
 
 ---
 
-- [] Section 9: Error Handling with Express (Completed: )
+- [x] Section 9: Error Handling with Express (Completed: 22/03/2022)
 
-  - [] 110 -
-  - [] 111 -
-  - [] 112 -
-  - [] 113 -
-  - [] 114 -
-  - [] 115 -
-  - [] 116 -
-  - [] 117 -
-  - [] 118 -
-  - [] 119 -
-  - [] 120 -
-  - [] 121 -
-  - [] 122 -
-  - [] 123 -
+  Note: In this section & going forward, I have transferred the project to TypeScript, I will no longer commit the project files to the repo, only the lecture notes.
+
+  - [x] 110 - Section Intro
+  - [x] 111 - Debugging Node.js with ndb
+  - [x] 112 - Handling Unhandled Routes
+  - [x] 113 - An Overview of Error Handling
+  - [x] 114 - Implementing a Global Error Handling Middleware
+  - [x] 115 - Better Errors & Refactoring
+  - [x] 116 - Catching Errors in Async Functions
+  - [x] 117 - Adding 404 Not Found Errors
+  - [x] 118 - Errors in Development vs Production
+  - [x] 119 - Handling Invalid Database IDs
+  - [x] 120 - Handling Duplicate Database Fields
+  - [x] 121 - Handling Mongoose Validation Errors
+  - [x] 122 - Errors Outside Express: Unhandled Rejections
+  - [x] 123 - Catching Uncaught Exceptions
 
 ---
 
 - [] Section 10: Authentication, Authorization & Security (Completed: )
 
-  - [] 124 -
-  - [] 125 -
-  - [] 126 -
-  - [] 127 -
-  - [] 128 -
-  - [] 129 -
-  - [] 130 -
-  - [] 131 -
-  - [] 132 -
-  - [] 133 -
-  - [] 134 -
-  - [] 135 -
-  - [] 136 -
-  - [] 137 -
-  - [] 138 -
-  - [] 139 -
-  - [] 140 -
-  - [] 141 -
-  - [] 142 -
-  - [] 143 -
-  - [] 144 -
-  - [] 145 -
-  - [] 146 -
+  - [x] 124 - Section Intro
+  - [] 125 - Modeling Users
+  - [] 126 - Creating New Users
+  - [] 127 - Managing Passwords
+  - [] 128 - How Authentication with JWT Works
+  - [] 129 - Signing Up Users
+  - [] 130 - Loggin in Users
+  - [] 131 - Protecting Tour Routes - Part 1
+  - [] 132 - Protecting Tour Routes - Part 2
+  - [] 133 - Advanced Postman Setup
+  - [] 134 - Authorization: User Roles & Permissions
+  - [] 135 - Password Reset Functionality: Rest Token
+  - [] 136 - Sending Emails with Nodemailer
+  - [] 137 - Password Rest Functionality: Setting New Password
+  - [] 138 - Updating the Current User: Password
+  - [] 139 - Updating the Current User: Data
+  - [] 140 - Deleting the Current User
+  - [] 141 - Security Best Practices
+  - [] 142 - Sending JWT via Cookie
+  - [] 143 - Implementing Rate Limiting
+  - [] 144 - Setting Security HTTP Headers
+  - [] 145 - Data Sanitization
+  - [] 146 - Preventing Parameter Pollution
 
 ---
 

@@ -8,7 +8,7 @@
 
 ---
 
-## Progress Tracker: 123/229 Lectures - 45.85%
+## Progress Tracker: 132/229 Lectures - 57.64%
 
 ## Sections & Lectures
 
@@ -184,14 +184,14 @@
 - [] Section 10: Authentication, Authorization & Security (Completed: )
 
   - [x] 124 - Section Intro
-  - [] 125 - Modeling Users
-  - [] 126 - Creating New Users
-  - [] 127 - Managing Passwords
-  - [] 128 - How Authentication with JWT Works
-  - [] 129 - Signing Up Users
-  - [] 130 - Loggin in Users
-  - [] 131 - Protecting Tour Routes - Part 1
-  - [] 132 - Protecting Tour Routes - Part 2
+  - [x] 125 - Modeling Users
+  - [x] 126 - Creating New Users
+  - [x] 127 - Managing Passwords
+  - [x] 128 - How Authentication with JWT Works
+  - [x] 129 - Signing Up Users
+  - [x] 130 - Loggin in Users
+  - [x] 131 - Protecting Tour Routes - Part 1
+  - [x] 132 - Protecting Tour Routes - Part 2
   - [] 133 - Advanced Postman Setup
   - [] 134 - Authorization: User Roles & Permissions
   - [] 135 - Password Reset Functionality: Rest Token

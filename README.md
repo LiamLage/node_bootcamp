@@ -8,7 +8,7 @@
 
 ---
 
-## Progress Tracker: 132/229 Lectures - 57.64%
+## Progress Tracker: 141/229 Lectures - 61.57%
 
 ## Sections & Lectures
 
@@ -192,17 +192,17 @@
   - [x] 130 - Loggin in Users
   - [x] 131 - Protecting Tour Routes - Part 1
   - [x] 132 - Protecting Tour Routes - Part 2
-  - [] 133 - Advanced Postman Setup
-  - [] 134 - Authorization: User Roles & Permissions
-  - [] 135 - Password Reset Functionality: Rest Token
-  - [] 136 - Sending Emails with Nodemailer
-  - [] 137 - Password Rest Functionality: Setting New Password
-  - [] 138 - Updating the Current User: Password
-  - [] 139 - Updating the Current User: Data
-  - [] 140 - Deleting the Current User
-  - [] 141 - Security Best Practices
-  - [] 142 - Sending JWT via Cookie
-  - [] 143 - Implementing Rate Limiting
+  - [x] 133 - Advanced Postman Setup
+  - [x] 134 - Authorization: User Roles & Permissions
+  - [x] 135 - Password Reset Functionality: Rest Token
+  - [x] 136 - Sending Emails with Nodemailer
+  - [x] 137 - Password Rest Functionality: Setting New Password
+  - [x] 138 - Updating the Current User: Password
+  - [x] 139 - Updating the Current User: Data
+  - [x] 140 - Deleting the Current User
+  - [x] 141 - Security Best Practices
+  - [x] 142 - Sending JWT via Cookie
+  - [x] 143 - Implementing Rate Limiting
   - [] 144 - Setting Security HTTP Headers
   - [] 145 - Data Sanitization
   - [] 146 - Preventing Parameter Pollution
